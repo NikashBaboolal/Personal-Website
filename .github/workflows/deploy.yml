@@ -1,0 +1,49 @@
+name: Deploy to Firebase Hosting
+
+# Every push to main rebuilds the static site and publishes it to
+# https://nikash.web.app and https://nikashb1.web.app.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write # lets the job get a short-lived Google token (no stored keys)
+
+concurrency:
+  group: firebase-deploy
+  cancel-in-progress: true
+
+env:
+  PROJECT_ID: nikash-website-938bc
+  WIF_PROVIDER: projects/445245397265/locations/global/workloadIdentityPools/github/providers/github
+  SERVICE_ACCOUNT: github-deployer@nikash-website-938bc.iam.gserviceaccount.com
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build static site
+        run: npm run build
+        env:
+          NEXT_PUBLIC_SITE_URL: https://nikash.web.app
+          NEXT_TELEMETRY_DISABLED: "1"
+
+      - name: Authenticate to Google Cloud (keyless)
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ env.WIF_PROVIDER }}
+          service_account: ${{ env.SERVICE_ACCOUNT }}
+
+      - name: Deploy to nikash.web.app and nikashb1.web.app
+        run: npx --yes firebase-tools@latest deploy --only hosting --project "$PROJECT_ID" --non-interactive
