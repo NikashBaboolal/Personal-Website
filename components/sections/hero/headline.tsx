@@ -8,7 +8,7 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 
 /**
  * H1 with a word-by-word masked rise. Words inside `highlight` get the
- * animated flame gradient.
+ * animated process-stream gradient (teal to blue).
  */
 export function HeroHeadline({
   text,

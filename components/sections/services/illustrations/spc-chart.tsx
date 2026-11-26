@@ -37,15 +37,15 @@ export function SpcChartIllustration({ className }: { className?: string }) {
         <span className="font-dm-mono text-night-muted text-[10px] tracking-[0.2em] uppercase">
           X-bar control chart
         </span>
-        <span className="bg-lamp-orange/10 text-lamp-orange inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[10px] font-semibold">
-          <span className="bg-lamp-orange size-1.5 rounded-full" />
+        <span className="bg-teal-400/10 text-teal-300 inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[10px] font-semibold">
+          <span className="bg-teal-400 size-1.5 rounded-full" />
           In control
         </span>
       </div>
       <div className="relative flex-1 rounded-2xl border border-white/10 bg-white/[0.03] p-3">
         <svg viewBox={`0 0 ${W} ${H}`} className="size-full" preserveAspectRatio="none" aria-hidden="true">
           {[UCL, LCL].map((y) => (
-            <line key={y} x1="0" x2={W} y1={y} y2={y} stroke="#e4183c" strokeOpacity="0.55" strokeDasharray="5 5" />
+            <line key={y} x1="0" x2={W} y1={y} y2={y} stroke="#f5a524" strokeOpacity="0.6" strokeDasharray="5 5" />
           ))}
           <line x1="0" x2={W} y1={MEAN} y2={MEAN} stroke="rgba(255,255,255,0.25)" />
           <text x={W - 4} y={UCL - 5} textAnchor="end" fontSize="9" fill="rgba(255,255,255,0.5)" className="font-dm-mono">
@@ -57,7 +57,7 @@ export function SpcChartIllustration({ className }: { className?: string }) {
           <motion.path
             d={path}
             fill="none"
-            stroke="#f7931e"
+            stroke="#22d3ee"
             strokeWidth="2"
             strokeLinejoin="round"
             initial={false}
@@ -65,14 +65,14 @@ export function SpcChartIllustration({ className }: { className?: string }) {
             transition={play ? { duration: T, times: [0, 0.55, 0.92, 1], repeat: Infinity, ease: "easeInOut" } : { duration: 0.5 }}
           />
           {points.map((p, i) => (
-            <circle key={i} cx={p.x} cy={p.y} r={i === 17 ? 4 : 2.2} fill={i === 17 ? "#e4183c" : "#ffd200"} opacity={0.9} />
+            <circle key={i} cx={p.x} cy={p.y} r={i === 17 ? 4 : 2.2} fill={i === 17 ? "#f5a524" : "#2dd4bf"} opacity={0.9} />
           ))}
           {play ? (
             <motion.circle
               cx={points[17].x}
               cy={points[17].y}
               fill="none"
-              stroke="#e4183c"
+              stroke="#f5a524"
               strokeWidth="1.5"
               initial={{ r: 4, opacity: 0 }}
               animate={{ r: [4, 4, 16], opacity: [0, 0.9, 0] }}

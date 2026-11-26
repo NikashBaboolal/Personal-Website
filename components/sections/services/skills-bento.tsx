@@ -78,7 +78,7 @@ export function SkillsBento({
                       <span
                         className={cn(
                           "font-dm-mono text-xs tracking-[0.2em]",
-                          night ? "text-lamp-orange" : "text-lamp-red",
+                          night ? "text-teal-300" : "text-teal-700",
                         )}
                       >
                         {String(i + 1).padStart(2, "0")}

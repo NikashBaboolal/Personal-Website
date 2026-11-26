@@ -5,7 +5,7 @@ import { IconAlertCircle, IconChevronDown } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 
 const fieldBase =
-  "peer block w-full rounded-2xl border bg-surface text-base text-foreground outline-none transition-[border-color,box-shadow,background-color] duration-300 placeholder:text-transparent focus:border-lamp-orange focus:shadow-[0_0_0_4px_rgba(247,147,30,0.15)]";
+  "peer block w-full rounded-2xl border bg-surface text-base text-foreground outline-none transition-[border-color,box-shadow,background-color] duration-300 placeholder:text-transparent focus:border-teal-500 focus:shadow-[0_0_0_4px_rgba(45,212,191,0.18)]";
 
 const labelBase =
   "pointer-events-none absolute left-4 origin-left text-muted-foreground transition-all duration-200";

@@ -6,27 +6,27 @@ import { useRef } from "react";
 import { ButtonLink } from "@/components/button";
 import { Container } from "@/components/container";
 import { person, summary } from "@/lib/content";
-import { Beams, DashedRule, GridFloor, LampBeam, NightGrid } from "./backdrop";
+import { DashedRule, NightGrid } from "./backdrop";
 import { CategoryFlipper } from "./category-flipper";
 import { HeroEmblem } from "./emblem";
 import { EyebrowPill } from "./eyebrow-pill";
 import { HeroHeadline } from "./headline";
-import { LightAbove } from "./light-above";
 import { Magnetic } from "./magnetic";
 import { HeroPhoto } from "./photo";
 import { ScrollCue } from "./scroll-cue";
-import { SparkField } from "./spark-field";
-import { Stars } from "./stars";
+import { MoleculeLattice } from "./molecule-lattice";
+import { ProcessLine } from "./process-line";
 import { HeroStats } from "./stats";
 import { useHeroReducedMotion } from "./use-reduced-motion";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
+
 /** First sentence of the CV summary. */
 const LEAD = `${summary.split(". ")[0]}.`;
 const DISCIPLINES = [...person.disciplines];
 
-/** Home page hero: night sky, plant photo, sparks, glowing NB monogram emblem. */
+/** Home page hero: blueprint grid, molecule lattice, animated process flow diagram and the benzene-ring NB emblem. */
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const reduce = useHeroReducedMotion();
@@ -51,18 +51,16 @@ export function Hero() {
         {/* ---------- Background layers ---------- */}
         <motion.div aria-hidden="true" className="absolute inset-0 -z-10" style={{ y: backdropY }}>
           <HeroPhoto />
-          <NightGrid className="opacity-80" />
-          <Stars className="absolute inset-x-0 top-0 h-[60%] opacity-70" />
-          <LightAbove className="absolute -top-16 -left-[18%] hidden max-w-none opacity-40 md:block lg:-left-[8%]" />
-          <LampBeam className="left-1/2 -translate-x-1/2 opacity-70 lg:left-[74%] lg:opacity-100" />
-          <Beams className="hidden md:block" />
+          <NightGrid className="opacity-90" />
+          <MoleculeLattice className="absolute inset-x-0 top-0 h-[70%] w-full opacity-80" />
+          {/* soft stream-coloured glow behind the emblem side */}
+          <div className="bg-lamp-orange absolute top-[18%] right-[-8%] h-[28rem] w-[28rem] rounded-full opacity-[0.07] blur-[120px]" />
+          <div className="bg-lamp-blue absolute bottom-[-10%] left-[10%] h-[22rem] w-[34rem] rounded-full opacity-[0.08] blur-[120px]" />
         </motion.div>
-        <GridFloor className="-z-10" />
-        <SparkField className="-z-10" />
         {/* vignette + bottom blend */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_90%_70%_at_50%_45%,transparent_40%,rgba(7,8,26,0.85)_100%)]"
+          className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_90%_70%_at_50%_45%,transparent_40%,rgba(6,20,27,0.85)_100%)]"
         />
         <div
           aria-hidden="true"
@@ -144,8 +142,12 @@ export function Hero() {
             </motion.div>
           </Container>
 
-          <Container className="mt-12 lg:mt-10">
-            <DashedRule className="mb-6" />
+          {/* process line: a strip of P&ID running edge to edge above the stats */}
+          <div className="mt-10 lg:mt-6">
+            <ProcessLine className="h-20 w-full opacity-80 sm:h-24 lg:h-[7.5rem]" />
+          </div>
+          <Container className="mt-4">
+            <DashedRule className="mb-6 opacity-60" />
             <HeroStats />
             <ScrollCue className="mt-8" />
           </Container>

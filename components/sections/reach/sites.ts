@@ -15,13 +15,14 @@ export type GlobeSite = {
   css: string;
 };
 
-const BRAND = {
-  yellow: { rgb: [1, 0.824, 0] as [number, number, number], css: "#ffd200" },
-  orange: { rgb: [0.969, 0.576, 0.118] as [number, number, number], css: "#f7931e" },
-  red: { rgb: [0.894, 0.094, 0.235] as [number, number, number], css: "#e4183c" },
+/** Process-stream palette: teal, cyan, sky. */
+const STREAMS = {
+  teal: { rgb: [0.176, 0.831, 0.749] as [number, number, number], css: "#2dd4bf" },
+  cyan: { rgb: [0.133, 0.827, 0.933] as [number, number, number], css: "#22d3ee" },
+  sky: { rgb: [0.22, 0.741, 0.973] as [number, number, number], css: "#38bdf8" },
 };
 
-const tones = [BRAND.yellow, BRAND.orange, BRAND.red];
+const tones = [STREAMS.teal, STREAMS.cyan, STREAMS.sky];
 
 export const globeSites: GlobeSite[] = places.map((p, i) => ({
   id: p.id,

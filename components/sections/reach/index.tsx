@@ -15,7 +15,7 @@ export function ReachGlobe({ className }: { className?: string }) {
       {/* Decorative backdrop */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         <div className="bg-grid-night absolute inset-0 [mask-image:radial-gradient(ellipse_at_30%_50%,black,transparent_70%)] opacity-60" />
-        <div className="absolute top-1/2 left-[28%] size-[60rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(59,63,182,0.22),transparent_60%)]" />
+        <div className="absolute top-1/2 left-[28%] size-[60rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(34,211,238,0.14),transparent_60%)]" />
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
       </div>
 

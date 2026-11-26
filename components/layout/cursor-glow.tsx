@@ -8,7 +8,7 @@ import { useMediaQuery } from "@/components/layout/use-media-query";
 const INTERACTIVE = "a, button, [role='button'], summary, label, input, select, textarea";
 
 /**
- * Soft flame glow + ring that trails the pointer. Desktop (pointer: fine) only,
+ * Soft teal glow + ring that trails the pointer. Desktop (pointer: fine) only,
  * hidden for reduced motion. Never intercepts clicks (pointer-events: none).
  */
 export function CursorGlow() {
@@ -52,7 +52,7 @@ function CursorGlowInner() {
   return (
     <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-[80] overflow-hidden">
       <motion.div
-        className="absolute top-0 left-0 size-[360px] -translate-x-1/2 -translate-y-1/2 rounded-full mix-blend-screen bg-[radial-gradient(circle,rgba(247,147,30,0.14),rgba(228,24,60,0.06)_40%,transparent_70%)]"
+        className="absolute top-0 left-0 size-[360px] -translate-x-1/2 -translate-y-1/2 rounded-full mix-blend-screen bg-[radial-gradient(circle,rgba(45,212,191,0.13),rgba(34,211,238,0.05)_40%,transparent_70%)]"
         style={{ x: gx, y: gy, opacity: fade }}
       />
       <motion.div

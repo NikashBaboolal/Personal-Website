@@ -5,7 +5,7 @@ import { useReducedMotion } from "@/components/motion/use-reduced-motion";
 import { cn } from "@/lib/utils";
 import { Seal, type SealTone } from "./seal";
 
-/** Certification card: embossed seal, conic sheen on hover, one-off shine sweep on reveal. */
+/** Certification card: hexagonal embossed seal, conic sheen on hover, one-off shine sweep on reveal. */
 export function BadgeCard({
   code,
   seal,
@@ -32,8 +32,8 @@ export function BadgeCard({
         "from-night-2 to-night bg-gradient-to-b px-4 pt-7 pb-6 text-center",
         "transition-[border-color,transform,box-shadow] duration-500 ease-out hover:-translate-y-1 hover:border-white/20",
         tone === "brass"
-          ? "hover:shadow-[0_20px_60px_-20px_rgba(247,147,30,0.45)]"
-          : "hover:shadow-[0_20px_60px_-20px_rgba(120,128,220,0.45)]",
+          ? "hover:shadow-[0_20px_60px_-20px_rgba(45,212,191,0.4)]"
+          : "hover:shadow-[0_20px_60px_-20px_rgba(56,189,248,0.4)]",
         className,
       )}
     >
@@ -48,7 +48,7 @@ export function BadgeCard({
         {/* conic sheen — spins only while hovered */}
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute inset-[13%] overflow-hidden rounded-full opacity-0 mix-blend-overlay transition-opacity duration-500 group-hover:opacity-100"
+          className="pointer-events-none absolute inset-[13%] overflow-hidden [clip-path:polygon(50%_0,93.3%_25%,93.3%_75%,50%_100%,6.7%_75%,6.7%_25%)] opacity-0 mix-blend-overlay transition-opacity duration-500 group-hover:opacity-100"
         >
           <span className="absolute -inset-1/2 animate-[spin_3.2s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0deg,rgba(255,255,255,0.95)_40deg,transparent_80deg,transparent_180deg,rgba(255,255,255,0.7)_220deg,transparent_260deg)] [animation-play-state:paused] group-hover:[animation-play-state:running]" />
         </span>

@@ -3,7 +3,7 @@
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 
-/** Pill with a travelling shimmer border and a live "pilot light" dot. */
+/** Pill with a travelling shimmer border and a live "online instrument" dot. */
 export function EyebrowPill({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
     <motion.p
@@ -16,7 +16,7 @@ export function EyebrowPill({ children, className }: { children: React.ReactNode
       <span aria-hidden="true" className="absolute inset-0 rounded-full bg-white/12" />
       <span
         aria-hidden="true"
-        className="animate-shimmer absolute inset-0 rounded-full bg-[linear-gradient(110deg,transparent_25%,#ffd200_45%,#e4183c_55%,transparent_75%)] bg-size-[200%_100%]"
+        className="animate-shimmer absolute inset-0 rounded-full bg-[linear-gradient(110deg,transparent_25%,#5eead4_45%,#22d3ee_55%,transparent_75%)] bg-size-[200%_100%]"
       />
       <span className="bg-night/90 font-dm-mono relative inline-flex items-center gap-2.5 rounded-full px-3.5 py-1.5 text-[0.65rem] tracking-[0.18em] text-white/85 uppercase backdrop-blur sm:text-xs">
         <span aria-hidden="true" className="relative flex size-2">

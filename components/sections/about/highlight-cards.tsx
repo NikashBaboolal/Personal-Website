@@ -19,7 +19,7 @@ export function HighlightCards({ className }: { className?: string }) {
                 className="bg-flame absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"
               />
               <span className="bg-night grid size-11 place-items-center rounded-2xl">
-                <Icon aria-hidden="true" className="text-lamp-yellow size-5" />
+                <Icon aria-hidden="true" className="size-5 text-teal-300" />
               </span>
               <h3 className="font-display text-foreground text-xl font-extrabold tracking-tight">{h.title}</h3>
               <p className="text-muted-foreground text-sm leading-relaxed">{h.description}</p>

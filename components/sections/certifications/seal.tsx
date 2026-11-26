@@ -8,27 +8,33 @@ const TONES: Record<
   SealTone,
   { hi: string; mid: string; lo: string; ink: string; glint: string }
 > = {
-  steel: { hi: "#f4f5fc", mid: "#a9aed4", lo: "#3d4178", ink: "#1b1d55", glint: "#ffffff" },
-  brass: { hi: "#fff4c2", mid: "#f6c44a", lo: "#9a5508", ink: "#4a2603", glint: "#fffbe6" },
+  // cool stainless (sky/blue streams)
+  steel: { hi: "#eef8ff", mid: "#9fd3f5", lo: "#1d4f7a", ink: "#0b2540", glint: "#ffffff" },
+  // teal-glazed (teal/cyan streams)
+  brass: { hi: "#e6fffb", mid: "#5eead4", lo: "#0f5f58", ink: "#04312d", glint: "#f0fffd" },
 };
 
-/** Scalloped rosette outline (deterministic, computed once). */
-const ROSETTE_PATH = (() => {
-  const points = 36;
-  const cx = 60;
-  const cy = 60;
-  const outer = 57;
-  const inner = 52.5;
+/** Hexagon outline (pointy top), like a benzene ring. Deterministic. */
+function hexPath(r: number, cx = 60, cy = 60) {
   let d = "";
-  for (let i = 0; i <= points * 2; i++) {
-    const r = i % 2 === 0 ? outer : inner;
-    const a = (i / (points * 2)) * Math.PI * 2 - Math.PI / 2;
-    const x = (cx + r * Math.cos(a)).toFixed(2);
-    const y = (cy + r * Math.sin(a)).toFixed(2);
-    d += `${i === 0 ? "M" : "L"}${x} ${y}`;
+  for (let i = 0; i < 6; i++) {
+    const a = (Math.PI / 3) * i - Math.PI / 2;
+    d += `${i === 0 ? "M" : "L"}${(cx + r * Math.cos(a)).toFixed(2)} ${(cy + r * Math.sin(a)).toFixed(2)}`;
   }
   return `${d}Z`;
-})();
+}
+const HEX_OUTER = hexPath(57);
+const HEX_GROOVE = hexPath(50);
+const HEX_FACE = hexPath(47);
+
+/** Bond stubs off each vertex, as in a substituted ring. */
+const BONDS = Array.from({ length: 6 }, (_, i) => {
+  const a = (Math.PI / 3) * i - Math.PI / 2;
+  const p = (r: number) => [(60 + r * Math.cos(a)).toFixed(2), (60 + r * Math.sin(a)).toFixed(2)];
+  const [x1, y1] = p(50);
+  const [x2, y2] = p(55);
+  return { x1, y1, x2, y2 };
+});
 
 /** Split a certificate code into a big mark and a smaller sub-line for the seal face. */
 export function sealText(code: string): { mark: string; sub: string } {
@@ -42,7 +48,7 @@ export function sealText(code: string): { mark: string; sub: string } {
   return { mark, sub };
 }
 
-/** Embossed metallic certification seal (SVG). Purely decorative. */
+/** Hexagonal (benzene-ring) certification seal with an embossed face (SVG). Purely decorative. */
 export function Seal({ code, tone, className }: { code: string; tone: SealTone; className?: string }) {
   const raw = useId();
   const id = raw.replace(/[^a-zA-Z0-9_-]/g, "");
@@ -72,27 +78,22 @@ export function Seal({ code, tone, className }: { code: string; tone: SealTone; 
 
       {/* cast shadow */}
       <ellipse cx="60" cy="112" rx="34" ry="4" fill="#000" opacity="0.35" />
-      {/* rosette rim */}
-      <path d={ROSETTE_PATH} fill={`url(#${id}-rim)`} />
-      <path d={ROSETTE_PATH} fill="none" stroke={t.lo} strokeOpacity="0.5" strokeWidth="0.6" />
+      {/* hexagonal rim */}
+      <path d={HEX_OUTER} fill={`url(#${id}-rim)`} strokeLinejoin="round" />
+      <path d={HEX_OUTER} fill="none" stroke={t.lo} strokeOpacity="0.5" strokeWidth="0.6" strokeLinejoin="round" />
       {/* embossed bevel: dark groove + light lip */}
-      <circle cx="60" cy="60" r="46.5" fill="none" stroke={t.lo} strokeWidth="2.2" opacity="0.75" />
-      <circle cx="60" cy="60.9" r="45.2" fill="none" stroke={t.glint} strokeWidth="0.9" opacity="0.7" />
+      <path d={HEX_GROOVE} fill="none" stroke={t.lo} strokeWidth="2.2" opacity="0.75" strokeLinejoin="round" />
       {/* pressed face */}
-      <circle cx="60" cy="60" r="44" fill={`url(#${id}-face)`} />
-      <circle cx="60" cy="60" r="44" fill={`url(#${id}-shine)`} />
-      {/* milled inner ring */}
-      <circle
-        cx="60"
-        cy="60"
-        r="38.5"
-        fill="none"
-        stroke={t.ink}
-        strokeOpacity="0.45"
-        strokeWidth="1.4"
-        strokeDasharray="0.9 1.6"
-      />
-      <circle cx="60" cy="60" r="35.5" fill="none" stroke={t.ink} strokeOpacity="0.25" strokeWidth="0.5" />
+      <path d={HEX_FACE} fill={`url(#${id}-face)`} />
+      <path d={HEX_FACE} fill={`url(#${id}-shine)`} />
+      {/* bond stubs */}
+      <g stroke={t.ink} strokeOpacity="0.35" strokeWidth="1.2" strokeLinecap="round">
+        {BONDS.map((b, i) => (
+          <line key={i} x1={b.x1} y1={b.y1} x2={b.x2} y2={b.y2} />
+        ))}
+      </g>
+      {/* aromatic ring */}
+      <circle cx="60" cy="60" r="34" fill="none" stroke={t.ink} strokeOpacity="0.4" strokeWidth="1.2" strokeDasharray="1 1.8" />
 
       {/* stamped lettering: highlight copy offset below, ink on top */}
       <g

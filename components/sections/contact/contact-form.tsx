@@ -335,7 +335,7 @@ function SuccessPanel({
             <motion.path
               d="M5 12.5l4.5 4.5L19 7.5"
               fill="none"
-              stroke="#ffd200"
+              stroke="#2dd4bf"
               strokeWidth={2.5}
               strokeLinecap="round"
               strokeLinejoin="round"

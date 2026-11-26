@@ -7,16 +7,26 @@ function svgId(reactId: string) {
   return `nb${reactId.replace(/[^a-zA-Z0-9_-]/g, "")}`;
 }
 
+/** Benzene-ring hexagon (flat-top Kekulé form) used by the NB mark, viewBox 0 0 64 64. */
+const RING = "M32 3.5 56.7 17.75v28.5L32 60.5 7.3 46.25v-28.5Z";
+/** Alternating inner double-bond strokes of the Kekulé structure. */
+const DOUBLE_BONDS = [
+  "M34.4 9.6 51.6 19.5", // top-right edge
+  "M51.6 44.5 34.4 54.4", // bottom-right edge
+  "M12.4 41.3V22.7", // left edge
+] as const;
+
 /**
- * "NB" monogram: a rounded hexagon outline (a nod to process flowsheets) with the
- * initials set inside, filled with the site's flame gradient.
+ * "NB" monogram set inside a benzene ring: the hexagon carbon skeleton with
+ * three alternating inner double bonds, filled with the process-stream gradient
+ * (teal -> cyan -> blue).
  */
 export function LogoMark({
   className,
   animated = false,
 }: {
   className?: string;
-  /** When true the outline draws in and the mark glows gently (static under reduced motion). */
+  /** When true the ring draws in like a stream filling a line (static under reduced motion). */
   animated?: boolean;
 }) {
   const uid = svgId(useId());
@@ -32,14 +42,14 @@ export function LogoMark({
     >
       <defs>
         <linearGradient id={`${uid}-g`} x1="6" y1="4" x2="58" y2="60" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#ffd200" />
-          <stop offset="0.38" stopColor="#f7931e" />
-          <stop offset="0.72" stopColor="#e4183c" />
-          <stop offset="1" stopColor="#3b3fb6" />
+          <stop offset="0" stopColor="#5eead4" />
+          <stop offset="0.4" stopColor="#2dd4bf" />
+          <stop offset="0.72" stopColor="#22d3ee" />
+          <stop offset="1" stopColor="#3b82f6" />
         </linearGradient>
       </defs>
       <path
-        d="M32 3.5 56.7 17.75v28.5L32 60.5 7.3 46.25v-28.5Z"
+        d={RING}
         fill="none"
         stroke={`url(#${uid}-g)`}
         strokeWidth="3"
@@ -60,6 +70,11 @@ export function LogoMark({
           />
         ) : null}
       </path>
+      <g stroke={`url(#${uid}-g)`} strokeWidth="1.8" strokeLinecap="round" opacity="0.75">
+        {DOUBLE_BONDS.map((d) => (
+          <path key={d} d={d} />
+        ))}
+      </g>
       <text
         x="32"
         y="33"
@@ -68,7 +83,7 @@ export function LogoMark({
         fill={`url(#${uid}-g)`}
         fontFamily="var(--font-archivo), Archivo, system-ui, sans-serif"
         fontWeight={900}
-        fontSize="24"
+        fontSize="21"
         letterSpacing="-1"
       >
         NB

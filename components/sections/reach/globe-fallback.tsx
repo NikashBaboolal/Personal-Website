@@ -61,7 +61,7 @@ export function GlobeFallback({ className }: { className?: string }) {
     >
       <div
         aria-hidden="true"
-        className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_50%_55%,rgba(59,63,182,0.35),rgba(7,8,26,0)_70%)]"
+        className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_50%_55%,rgba(45,212,191,0.28),rgba(6,16,30,0)_70%)]"
       />
       <div aria-hidden="true" className="border-night-line absolute inset-[6%] rounded-full border" />
       {map ? (

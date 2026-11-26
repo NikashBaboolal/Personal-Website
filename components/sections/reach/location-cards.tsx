@@ -48,7 +48,7 @@ export function LocationCards({ className }: { className?: string }) {
         >
           <span className="absolute inset-0 bg-white/10" />
           <motion.span
-            className="absolute inset-0 origin-top bg-gradient-to-b from-[#ffd200] via-[#f7931e] to-[#e4183c]"
+            className="absolute inset-0 origin-top bg-gradient-to-b from-[#2dd4bf] via-[#22d3ee] to-[#3b82f6]"
             initial={reduce ? false : { scaleY: 0 }}
             whileInView={{ scaleY: 1 }}
             viewport={{ once: true, margin: "0px 0px -15% 0px" }}

@@ -28,10 +28,10 @@ export function FooterWordmark() {
         <svg viewBox="0 0 1000 132" className="block h-auto w-full" preserveAspectRatio="xMidYMax meet">
           <defs>
             <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="0.4">
-              <stop offset="0" stopColor="#ffd200" />
-              <stop offset="0.3" stopColor="#f7931e" />
-              <stop offset="0.62" stopColor="#e4183c" />
-              <stop offset="1" stopColor="#3b3fb6" />
+              <stop offset="0" stopColor="#2dd4bf" />
+              <stop offset="0.3" stopColor="#22d3ee" />
+              <stop offset="0.62" stopColor="#38bdf8" />
+              <stop offset="1" stopColor="#3b82f6" />
             </linearGradient>
           </defs>
           <text

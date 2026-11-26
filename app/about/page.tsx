@@ -17,7 +17,7 @@ export const metadata = getSEO({
 export default function AboutPage() {
   return (
     <>
-      <PageHero eyebrow="About" title={`Hi, I'm ${person.firstName}`} lead={summary} image="factory" />
+      <PageHero eyebrow="About" title={`Hi, I'm ${person.firstName}`} lead={summary} image="instrumentation" />
       <IntroductionEditorial />
       <SkillsBento showLink={false} />
       <EducationSection />

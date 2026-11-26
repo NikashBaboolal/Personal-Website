@@ -36,9 +36,9 @@ export function TiltCard({
   const rotateY = useSpring(useTransform(px, [0, 1], [-6, 6]), SPRING);
 
   const spotColor =
-    tone === "night" ? "rgba(247,147,30,0.22)" : "rgba(255,210,0,0.28)";
+    tone === "night" ? "rgba(45,212,191,0.18)" : "rgba(34,211,238,0.16)";
   const spotlight = useMotionTemplate`radial-gradient(380px circle at ${mx}px ${my}px, ${spotColor}, transparent 70%)`;
-  const ring = useMotionTemplate`radial-gradient(260px circle at ${mx}px ${my}px, rgba(247,147,30,0.9), transparent 70%)`;
+  const ring = useMotionTemplate`radial-gradient(260px circle at ${mx}px ${my}px, rgba(34,211,238,0.85), transparent 70%)`;
 
   function onMove(e: React.PointerEvent<HTMLElement>) {
     if (e.pointerType === "touch") return;
@@ -74,7 +74,7 @@ export function TiltCard({
       className={cn(
         "group/card relative isolate overflow-hidden rounded-3xl border transition-shadow duration-500 will-change-transform",
         tone === "night"
-          ? "bg-night border-night-line text-white hover:shadow-[0_30px_80px_-30px_rgba(59,63,182,0.6)]"
+          ? "bg-night border-night-line text-white hover:shadow-[0_30px_80px_-30px_rgba(34,211,238,0.35)]"
           : "bg-surface border-line text-foreground hover:shadow-[0_30px_80px_-30px_rgba(11,12,31,0.25)]",
         className,
       )}

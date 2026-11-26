@@ -22,7 +22,7 @@ export function ScrollCue({ className }: { className?: string }) {
     >
       <span className="relative flex h-9 w-5.5 justify-center rounded-full border border-white/25">
         <motion.span
-          className="bg-lamp-yellow mt-1.5 block size-1 rounded-full shadow-[0_0_8px_rgba(255,210,0,0.9)]"
+          className="bg-lamp-yellow mt-1.5 block size-1 rounded-full shadow-[0_0_8px_rgba(94,234,212,0.9)]"
           initial={{ y: 0, opacity: 1 }}
           animate={active ? { y: [0, 12, 12], opacity: [1, 0, 0] } : { y: 0, opacity: 1 }}
           transition={

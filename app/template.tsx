@@ -38,7 +38,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
           transition={{ duration: 0.7, ease: EASE }}
         >
           <div className="bg-night flex-1" />
-          <div className="bg-flame h-2 shadow-[0_0_40px_10px_rgba(247,147,30,0.45)]" />
+          <div className="bg-flame h-2 shadow-[0_0_40px_10px_rgba(45,212,191,0.45)]" />
         </motion.div>
       ) : null}
       <motion.div

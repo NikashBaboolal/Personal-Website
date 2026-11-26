@@ -7,10 +7,10 @@ import { usePlay } from "./use-play";
 
 /** Generic project phases (illustrative, not a claim). Start/length in 12ths of the track. */
 const ROWS = [
-  { label: "Plan", start: 0, len: 3, color: "#ffd200" },
-  { label: "Trial", start: 2, len: 5, color: "#f7931e" },
-  { label: "Measure", start: 5, len: 4, color: "#e4183c" },
-  { label: "Handover", start: 8, len: 4, color: "#7b80e0" },
+  { label: "Plan", start: 0, len: 3, color: "#2dd4bf" },
+  { label: "Trial", start: 2, len: 5, color: "#22d3ee" },
+  { label: "Measure", start: 5, len: 4, color: "#38bdf8" },
+  { label: "Handover", start: 8, len: 4, color: "#3b82f6" },
 ] as const;
 
 const pct = (n: number) => `${(n / 12) * 100}%`;
@@ -28,8 +28,8 @@ export function ProjectPlanIllustration({ className }: { className?: string }) {
           <span className="font-dm-mono text-night-muted text-[10px] tracking-[0.2em] uppercase">
             Project plan
           </span>
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-400/10 px-2 py-0.5 text-[10px] font-semibold text-emerald-300">
-            <span className="size-1.5 rounded-full bg-emerald-400" />
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-teal-400/10 px-2 py-0.5 text-[10px] font-semibold text-teal-300">
+            <span className="size-1.5 rounded-full bg-teal-400" />
             On track
           </span>
         </div>

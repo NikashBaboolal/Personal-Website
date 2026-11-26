@@ -25,7 +25,7 @@ export default function ErrorPage({
     <section className="bg-night relative isolate flex min-h-[100svh] items-center overflow-hidden py-24 text-white md:py-32">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <div className="bg-grid-night mask-fade-y absolute inset-0 opacity-60" />
-        <div className="bg-lamp-red absolute top-1/3 left-1/2 size-[30rem] -translate-x-1/2 rounded-full opacity-20 blur-[120px]" />
+        <div className="absolute top-1/3 bg-amber-500 left-1/2 size-[30rem] -translate-x-1/2 rounded-full opacity-20 blur-[120px]" />
       </div>
 
       <Container className="flex flex-col items-center text-center">

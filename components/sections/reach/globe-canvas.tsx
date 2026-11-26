@@ -43,8 +43,8 @@ const arcs: Arc[] = (() => {
   const ct = byId("cape-town");
   const de = byId("braunschweig");
   const out: Arc[] = [];
-  if (home && ct) out.push({ from: [home.lat, home.lng], to: [ct.lat, ct.lng], color: [1, 0.824, 0] });
-  if (ct && de) out.push({ from: [ct.lat, ct.lng], to: [de.lat, de.lng], color: [0.969, 0.576, 0.118] });
+  if (home && ct) out.push({ from: [home.lat, home.lng], to: [ct.lat, ct.lng], color: [0.176, 0.831, 0.749] });
+  if (ct && de) out.push({ from: [ct.lat, ct.lng], to: [de.lat, de.lng], color: [0.133, 0.827, 0.933] });
   return out;
 })();
 
@@ -139,12 +139,12 @@ export function GlobeCanvas({ className }: { className?: string }) {
         mapSamples: 16000,
         mapBrightness: 5.5,
         mapBaseBrightness: 0.02,
-        baseColor: [0.2, 0.22, 0.5],
-        markerColor: [0.969, 0.576, 0.118],
-        glowColor: [0.23, 0.25, 0.71],
+        baseColor: [0.12, 0.24, 0.34],
+        markerColor: [0.176, 0.831, 0.749],
+        glowColor: [0.13, 0.5, 0.6],
         markers,
         arcs,
-        arcColor: [0.969, 0.576, 0.118],
+        arcColor: [0.133, 0.827, 0.933],
         arcWidth: 0.6,
         arcHeight: 0.18,
         markerElevation: MARKER_ELEVATION,
@@ -341,7 +341,7 @@ export function GlobeCanvas({ className }: { className?: string }) {
       {/* Atmosphere glow behind the globe */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-[12%] rounded-full bg-[radial-gradient(circle_at_50%_60%,rgba(247,147,30,0.28),rgba(59,63,182,0.18)_45%,transparent_70%)] blur-2xl"
+        className="pointer-events-none absolute inset-[12%] rounded-full bg-[radial-gradient(circle_at_50%_60%,rgba(45,212,191,0.22),rgba(56,189,248,0.16)_45%,transparent_70%)] blur-2xl"
       />
       {/* Placeholder ring while WebGL spins up */}
       <div

@@ -10,15 +10,39 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 const colors = {
-  night: "#07081a",
-  yellow: "#ffd200",
-  orange: "#f7931e",
-  red: "#e4183c",
-  blue: "#3b3fb6",
-  navy: "#23256b",
+  night: "#06141b",
+  mint: "#5eead4",
+  teal: "#2dd4bf",
+  cyan: "#22d3ee",
+  blue: "#3b82f6",
+  navy: "#0f3a4a",
+  hot: "#f5a524",
 };
 
-const flame = `linear-gradient(100deg, ${colors.yellow} 0%, ${colors.orange} 38%, ${colors.red} 72%, ${colors.blue} 100%)`;
+/** Process-stream gradient (teal -> cyan -> blue). */
+const stream = `linear-gradient(100deg, ${colors.mint} 0%, ${colors.teal} 35%, ${colors.cyan} 68%, ${colors.blue} 100%)`;
+
+/** Small process flow diagram strip (column, exchanger, reactor, instrument bubbles). */
+const pfdSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 160" width="560" height="160" fill="none">
+  <g stroke="rgba(94,234,212,0.35)" stroke-width="2">
+    <path d="M0 120 H70"/><path d="M190 120 H230 V70 H262"/><path d="M342 120 H392 V60 H430"/><path d="M470 20 V8 H560"/>
+  </g>
+  <g stroke="${colors.mint}" stroke-width="2.4" stroke-dasharray="8 18" stroke-linecap="round">
+    <path d="M0 120 H70"/><path d="M190 120 H230 V70 H262"/><path d="M342 120 H392 V60 H430"/><path d="M470 20 V8 H560"/>
+  </g>
+  <path d="M110 92 V102 M150 138 V156" stroke="${colors.hot}" stroke-width="2" stroke-dasharray="6 8"/>
+  <rect x="70" y="102" width="120" height="36" rx="18" stroke="${colors.mint}" stroke-width="2"/>
+  <path d="M86 112 H174 M86 120 H174 M86 128 H174" stroke="${colors.mint}" stroke-width="1" opacity="0.6"/>
+  <path d="M262 70 Q262 50 302 50 Q342 50 342 70 V128 Q342 150 302 150 Q262 150 262 128 Z" stroke="${colors.mint}" stroke-width="2"/>
+  <path d="M302 36 V130 M282 124 H322 M286 100 H318" stroke="${colors.cyan}" stroke-width="2" stroke-linecap="round"/>
+  <rect x="430" y="20" width="44" height="136" rx="20" stroke="${colors.mint}" stroke-width="2"/>
+  <path d="M436 44 H466 M440 64 H470 M436 84 H466 M440 104 H470 M436 124 H466" stroke="${colors.mint}" stroke-width="1.4" opacity="0.6"/>
+  <circle cx="40" cy="78" r="18" stroke="${colors.cyan}" stroke-width="1.6"/><path d="M22 78 H58" stroke="${colors.cyan}" stroke-width="1.2"/>
+  <path d="M40 96 V120" stroke="${colors.cyan}" stroke-width="1.2" stroke-dasharray="4 4"/>
+  <circle cx="380" cy="24" r="18" stroke="${colors.cyan}" stroke-width="1.6"/><path d="M362 24 H398" stroke="${colors.cyan}" stroke-width="1.2"/>
+  <path d="M380 42 V60" stroke="${colors.cyan}" stroke-width="1.2" stroke-dasharray="4 4"/>
+</svg>`;
+const pfdSrc = `data:image/svg+xml;base64,${Buffer.from(pfdSvg).toString("base64")}`;
 
 export default async function OpengraphImage() {
   // The NB monogram, inlined as a data URI.
@@ -49,7 +73,7 @@ export default async function OpengraphImage() {
                 top: 0,
                 width: 1,
                 height: 630,
-                backgroundColor: "rgba(255,255,255,0.045)",
+                backgroundColor: "rgba(94,234,212,0.06)",
               }}
             />
           ))}
@@ -62,7 +86,7 @@ export default async function OpengraphImage() {
                 left: 0,
                 height: 1,
                 width: 1200,
-                backgroundColor: "rgba(255,255,255,0.045)",
+                backgroundColor: "rgba(94,234,212,0.06)",
               }}
             />
           ))}
@@ -77,7 +101,7 @@ export default async function OpengraphImage() {
             height: 630,
             display: "flex",
             backgroundImage:
-              "radial-gradient(circle at 960px 300px, rgba(247,147,30,0.38) 0%, rgba(228,24,60,0.2) 22%, rgba(59,63,182,0.1) 40%, rgba(7,8,26,0) 58%)",
+              "radial-gradient(circle at 960px 300px, rgba(45,212,191,0.32) 0%, rgba(34,211,238,0.16) 22%, rgba(59,130,246,0.1) 40%, rgba(6,20,27,0) 58%)",
           }}
         />
         <div
@@ -89,16 +113,24 @@ export default async function OpengraphImage() {
             height: 630,
             display: "flex",
             backgroundImage:
-              "radial-gradient(circle at 0px 630px, rgba(59,63,182,0.4) 0%, rgba(35,37,107,0.16) 25%, rgba(7,8,26,0) 45%)",
+              "radial-gradient(circle at 0px 630px, rgba(59,130,246,0.32) 0%, rgba(15,58,74,0.2) 25%, rgba(6,20,27,0) 45%)",
           }}
         />
-        {/* Brand mark */}
+        {/* Process flow strip along the bottom-right */}
+        <img
+          src={pfdSrc}
+          alt=""
+          width={420}
+          height={120}
+          style={{ position: "absolute", right: 36, bottom: 30, opacity: 0.55 }}
+        />
+        {/* Brand mark (NB inside a benzene ring) */}
         <img
           src={markSrc}
           alt=""
-          width={300}
-          height={300}
-          style={{ position: "absolute", right: 110, top: 165, borderRadius: 64 }}
+          width={250}
+          height={250}
+          style={{ position: "absolute", right: 120, top: 160, borderRadius: 56 }}
         />
 
         {/* Content */}
@@ -114,7 +146,7 @@ export default async function OpengraphImage() {
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-            <div style={{ width: 44, height: 6, borderRadius: 9999, backgroundImage: flame }} />
+            <div style={{ width: 44, height: 6, borderRadius: 9999, backgroundImage: stream }} />
             <div
               style={{
                 display: "flex",
@@ -136,7 +168,7 @@ export default async function OpengraphImage() {
                 fontSize: 120,
                 lineHeight: 1,
                 letterSpacing: -3,
-                backgroundImage: flame,
+                backgroundImage: stream,
                 backgroundClip: "text",
                 color: "transparent",
               }}
@@ -181,7 +213,7 @@ export default async function OpengraphImage() {
               }}
             >
               <div
-                style={{ width: 10, height: 10, borderRadius: 9999, backgroundColor: colors.yellow }}
+                style={{ width: 10, height: 10, borderRadius: 9999, backgroundColor: colors.mint }}
               />
               {person.ecsa}
             </div>

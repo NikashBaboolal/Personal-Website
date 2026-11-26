@@ -2,10 +2,11 @@
 @import "tw-animate-css";
 
 /*
-  Lamp Innovations design tokens.
-  Brand colours are sampled from the Lamp Innovations logo (yellow -> orange
-  -> red flame, indigo base, navy wordmark) and the "volt" heading yellow used
-  in the company profile.
+  Nikash Baboolal design tokens: "process blueprint".
+  Cool ink-navy night surfaces (like a P&ID on a dark screen) with process-stream
+  accents: teal / cyan / sky "cold streams" and a sparse amber "hot stream".
+  Token names (lamp-*, flame) are kept from the original template so every
+  component recolours from this one file.
 */
 
 @layer base {
@@ -14,45 +15,47 @@
   ::before,
   ::backdrop,
   ::file-selector-button {
-    border-color: var(--color-line, #e4e2dc);
+    border-color: var(--color-line, #dbe4e5);
   }
 }
 
 @theme inline {
   /* Surfaces */
-  --color-background: #f4f3ef;
-  --color-foreground: #0b0c1f;
+  --color-background: #f3f6f6;
+  --color-foreground: #071a22;
   --color-surface: #ffffff;
-  --color-surface-muted: #ebe9e3;
-  --color-line: #e4e2dc;
-  --color-muted-foreground: #6b6b78;
+  --color-surface-muted: #e6eded;
+  --color-line: #dbe4e5;
+  --color-muted-foreground: #5d6f76;
 
   /* Night (dark sections) */
-  --color-night: #07081a;
-  --color-night-2: #0e1030;
-  --color-night-3: #171a45;
+  --color-night: #06141b;
+  --color-night-2: #0b1f29;
+  --color-night-3: #12303c;
   --color-night-line: rgba(255, 255, 255, 0.1);
-  --color-night-muted: #a3a5c2;
+  --color-night-muted: #9fb4bf;
 
   /* Brand */
-  --color-navy: #23256b;
-  --color-lamp-yellow: #ffd200;
-  --color-lamp-orange: #f7931e;
-  --color-lamp-red: #e4183c;
-  --color-lamp-blue: #3b3fb6;
-  --color-volt: #eef01e;
+  --color-navy: #0f3a4a;
+  --color-lamp-yellow: #5eead4;
+  --color-lamp-orange: #2dd4bf;
+  --color-lamp-red: #22d3ee;
+  --color-lamp-blue: #3b82f6;
+  --color-volt: #5eead4;
+  --color-stream-sky: #38bdf8;
+  --color-stream-hot: #f5a524;
 
   /* Template compatibility aliases */
-  --color-primary: #ffd200;
-  --color-heading: #0b0c1f;
-  --color-charcoal: #07081a;
-  --color-offwhite: #f4f3ef;
-  --color-secondary: #ebe9e3;
+  --color-primary: #2dd4bf;
+  --color-heading: #071a22;
+  --color-charcoal: #06141b;
+  --color-offwhite: #f3f6f6;
+  --color-secondary: #e6eded;
 
-  --shadow-card-md: 0 2px 6px 0 rgba(11, 12, 31, 0.1);
-  --shadow-card-lg: 0 4px 12px 0 rgba(11, 12, 31, 0.1);
-  --shadow-card-xl: 0 8px 24px 0 rgba(11, 12, 31, 0.12);
-  --shadow-glow: 0 0 40px 0 rgba(247, 147, 30, 0.35);
+  --shadow-card-md: 0 2px 6px 0 rgba(7, 26, 34, 0.1);
+  --shadow-card-lg: 0 4px 12px 0 rgba(7, 26, 34, 0.1);
+  --shadow-card-xl: 0 8px 24px 0 rgba(7, 26, 34, 0.12);
+  --shadow-glow: 0 0 40px 0 rgba(45, 212, 191, 0.35);
 
   --tracking-xs: 1%;
   --tracking-sm: 2%;
@@ -66,11 +69,17 @@
   --font-mono: var(--font-geist-mono);
   --font-dm-mono: var(--font-dm-mono);
 
-  /* Animations usable as Tailwind classes, e.g. animate-flame-shift */
+  /* Animations usable as Tailwind classes, e.g. animate-flame-shift (stream gradient drift) */
   --animate-flame-shift: flame-shift 8s ease-in-out infinite;
   --animate-float-slow: float-slow 9s ease-in-out infinite;
   --animate-spin-slow: spin 18s linear infinite;
   --animate-shimmer: shimmer 2.4s linear infinite;
+  --animate-stream-flow: stream-flow 1.6s linear infinite;
+  --animate-stream-flow-slow: stream-flow-slow 6s linear infinite;
+  --animate-bubble-rise: bubble-rise 4.8s ease-in infinite;
+  --animate-bubble-rise-short: bubble-rise-short 2.8s ease-in infinite;
+  --animate-tank-level: tank-level 9s ease-in-out infinite;
+  --animate-agitate: agitate 1.4s ease-in-out infinite;
   --animate-pulse-ring: pulse-ring 2.4s cubic-bezier(0.2, 0.6, 0.3, 1) infinite;
 }
 
@@ -81,6 +90,68 @@
   }
   50% {
     background-position: 100% 50%;
+  }
+}
+
+@keyframes stream-flow {
+  to {
+    stroke-dashoffset: -48;
+  }
+}
+
+@keyframes stream-flow-slow {
+  to {
+    stroke-dashoffset: -96;
+  }
+}
+
+@keyframes bubble-rise {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(-380px);
+    opacity: 0;
+  }
+}
+
+@keyframes bubble-rise-short {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(-96px);
+    opacity: 0;
+  }
+}
+
+/* Tank level slowly filling and drawing down. */
+@keyframes tank-level {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-18px);
+  }
+}
+
+/* Agitator blades seen side-on: flipping scaleX reads as rotation. */
+@keyframes agitate {
+  0%,
+  100% {
+    transform: scaleX(1);
+  }
+  50% {
+    transform: scaleX(-1);
   }
 }
 
@@ -117,10 +188,10 @@
 @utility text-flame {
   background-image: linear-gradient(
     100deg,
-    #ffd200 0%,
-    #f7931e 30%,
-    #e4183c 60%,
-    #3b3fb6 100%
+    #5eead4 0%,
+    #2dd4bf 30%,
+    #22d3ee 60%,
+    #3b82f6 100%
   );
   background-size: 200% 100%;
   -webkit-background-clip: text;
@@ -131,10 +202,10 @@
 @utility bg-flame {
   background-image: linear-gradient(
     120deg,
-    #ffd200 0%,
-    #f7931e 30%,
-    #e4183c 62%,
-    #3b3fb6 100%
+    #5eead4 0%,
+    #2dd4bf 30%,
+    #22d3ee 60%,
+    #3b82f6 100%
   );
 }
 
@@ -147,8 +218,8 @@
 
 @utility bg-grid-light {
   background-image:
-    linear-gradient(to right, rgba(11, 12, 31, 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(11, 12, 31, 0.06) 1px, transparent 1px);
+    linear-gradient(to right, rgba(7, 26, 34, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(7, 26, 34, 0.06) 1px, transparent 1px);
   background-size: 56px 56px;
 }
 
@@ -178,8 +249,8 @@ body {
 }
 
 ::selection {
-  background: #ffd200;
-  color: #07081a;
+  background: #2dd4bf;
+  color: #06141b;
 }
 
 /* Lenis smooth scroll handles scrolling; keep native smooth for anchors when Lenis is off */

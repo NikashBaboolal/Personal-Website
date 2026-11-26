@@ -6,27 +6,21 @@ import { useReducedMotion } from "@/components/motion/use-reduced-motion";
 import { ButtonLink } from "@/components/button";
 import { Container } from "@/components/container";
 
-/** Deterministic spark trajectories (no Math.random → no hydration mismatch). */
-const SPARKS = Array.from({ length: 18 }, (_, i) => {
-  const angle = -90 + (((i * 47) % 150) - 75); // fan upwards
-  const distance = 110 + ((i * 37) % 150);
-  const rad = (angle * Math.PI) / 180;
-  return {
-    id: i,
-    x: Math.round(Math.cos(rad) * distance),
-    y: Math.round(Math.sin(rad) * distance),
-    rotate: angle + 90,
-    delay: (i * 0.23) % 2.4,
-    duration: 0.9 + ((i * 13) % 7) / 10,
-    length: 8 + ((i * 5) % 12),
-  };
-});
+/** Deterministic drips from the stuck valve (no Math.random -> no hydration mismatch). */
+const DRIPS = Array.from({ length: 10 }, (_, i) => ({
+  id: i,
+  x: ((i * 37) % 90) - 45,
+  fall: 140 + ((i * 53) % 120),
+  delay: (i * 0.41) % 3,
+  duration: 1.1 + ((i * 13) % 6) / 10,
+  size: 4 + ((i * 7) % 4),
+}));
 
 function ValveWheel({ animate }: { animate: boolean }) {
   return (
     <motion.svg
       viewBox="0 0 100 100"
-      className="inline-block size-[0.74em] align-[-0.02em] drop-shadow-[0_0_30px_rgba(247,147,30,0.45)]"
+      className="inline-block size-[0.74em] align-[-0.02em] drop-shadow-[0_0_30px_rgba(45,212,191,0.45)]"
       aria-hidden="true"
       // Someone keeps trying to open it... it's stuck.
       initial={{ rotate: 0 }}
@@ -39,10 +33,10 @@ function ValveWheel({ animate }: { animate: boolean }) {
     >
       <defs>
         <linearGradient id="nf-wheel" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#ffd200" />
-          <stop offset="0.45" stopColor="#f7931e" />
-          <stop offset="0.8" stopColor="#e4183c" />
-          <stop offset="1" stopColor="#3b3fb6" />
+          <stop offset="0" stopColor="#5eead4" />
+          <stop offset="0.45" stopColor="#2dd4bf" />
+          <stop offset="0.8" stopColor="#22d3ee" />
+          <stop offset="1" stopColor="#3b82f6" />
         </linearGradient>
       </defs>
       <circle cx="50" cy="50" r="42" fill="none" stroke="url(#nf-wheel)" strokeWidth="9" />
@@ -58,8 +52,8 @@ function ValveWheel({ animate }: { animate: boolean }) {
           transform={`rotate(${deg} 50 50)`}
         />
       ))}
-      <circle cx="50" cy="50" r="12" fill="#07081a" stroke="url(#nf-wheel)" strokeWidth="6" />
-      <circle cx="50" cy="50" r="3.5" fill="#ffd200" />
+      <circle cx="50" cy="50" r="12" fill="#06141b" stroke="url(#nf-wheel)" strokeWidth="6" />
+      <circle cx="50" cy="50" r="3.5" fill="#f5a524" />
     </motion.svg>
   );
 }
@@ -111,34 +105,31 @@ export function NotFoundScene() {
         </p>
 
         <div className="relative mt-6">
-          {/* Sparks fly off the stuck valve */}
+          {/* The stuck valve is weeping: process fluid drips from the packing */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute top-1/2 left-1/2 size-0"
+            className="pointer-events-none absolute top-[62%] left-1/2 size-0"
           >
-            {SPARKS.map((spark) => (
+            {DRIPS.map((drip) => (
               <motion.span
-                key={spark.id}
-                className="absolute top-0 left-0 block w-0.5 rounded-full bg-linear-to-t from-transparent via-lamp-orange to-lamp-yellow"
-                style={{ height: spark.length, rotate: spark.rotate }}
-                initial={{ opacity: 0, x: 0, y: 0 }}
+                key={drip.id}
+                className="from-lamp-yellow to-lamp-red absolute top-0 left-0 block rounded-full rounded-tl-none bg-linear-to-b"
+                style={{ width: drip.size, height: drip.size, x: drip.x, rotate: 45 }}
+                initial={{ opacity: 0, y: 0 }}
                 animate={
                   animate
-                    ? {
-                        opacity: [0, 1, 0],
-                        x: [0, spark.x],
-                        y: [0, spark.y, spark.y + 40],
-                      }
-                    : { opacity: 0, x: 0, y: 0 }
+                    ? { opacity: [0, 1, 0], y: [0, 6, drip.fall] }
+                    : { opacity: 0, y: 0 }
                 }
                 transition={
                   animate
                     ? {
-                        duration: spark.duration,
-                        delay: spark.delay,
+                        duration: drip.duration,
+                        delay: drip.delay,
                         repeat: Infinity,
-                        repeatDelay: 1.2,
-                        ease: "easeOut",
+                        repeatDelay: 1.4,
+                        ease: "easeIn",
+                        times: [0, 0.3, 1],
                       }
                     : { duration: 0 }
                 }
@@ -164,7 +155,7 @@ export function NotFoundScene() {
           This valve is closed.
         </p>
         <p className="text-night-muted mt-4 max-w-xl text-base sm:text-lg">
-          The page you&apos;re after has been shut off, moved or never left the workshop. Let&apos;s
+          The page you&apos;re after has been shut off, moved or never left the pilot plant. Let&apos;s
           get things flowing again.
         </p>
 
@@ -179,7 +170,7 @@ export function NotFoundScene() {
             View experience
           </ButtonLink>
           <ButtonLink href="/contact" variant="ghost-light">
-            Contact us
+            Get in touch
           </ButtonLink>
         </nav>
       </Container>

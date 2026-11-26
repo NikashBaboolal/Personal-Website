@@ -29,8 +29,8 @@ export function Certifications({ className }: { className?: string }) {
     >
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         <div className="bg-grid-night absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,black_30%,black_70%,transparent)] opacity-40" />
-        <div className="absolute -top-40 right-[-10%] size-[44rem] rounded-full bg-[radial-gradient(circle,rgba(247,147,30,0.16),transparent_60%)]" />
-        <div className="absolute bottom-[-20%] left-[-10%] size-[40rem] rounded-full bg-[radial-gradient(circle,rgba(59,63,182,0.25),transparent_60%)]" />
+        <div className="absolute -top-40 right-[-10%] size-[44rem] rounded-full bg-[radial-gradient(circle,rgba(45,212,191,0.14),transparent_60%)]" />
+        <div className="absolute bottom-[-20%] left-[-10%] size-[40rem] rounded-full bg-[radial-gradient(circle,rgba(59,130,246,0.22),transparent_60%)]" />
       </div>
 
       <Container className="relative">

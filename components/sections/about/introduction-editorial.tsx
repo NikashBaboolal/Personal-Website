@@ -4,6 +4,7 @@ import { Reveal } from "@/components/motion/reveal";
 import { TextReveal } from "@/components/motion/text-reveal";
 import { about, person } from "@/lib/content";
 import { getMedia } from "@/lib/media";
+import { MoleculeLattice } from "@/components/layout/process-art";
 import { HighlightCards } from "./highlight-cards";
 import { StatsRow } from "./stats-row";
 
@@ -53,7 +54,7 @@ export function IntroductionEditorial() {
               <TextReveal text="Rigorous, safety-first process engineering, backed by data." />
             </h2>
             <Reveal delay={0.1}>
-              <p className="text-foreground first-letter:font-display first-letter:text-lamp-orange mt-10 text-lg leading-relaxed first-letter:float-left first-letter:mr-3 first-letter:text-7xl first-letter:leading-[0.8] first-letter:font-black md:text-xl">
+              <p className="text-foreground first-letter:font-display first-letter:text-teal-600 mt-10 text-lg leading-relaxed first-letter:float-left first-letter:mr-3 first-letter:text-7xl first-letter:leading-[0.8] first-letter:font-black md:text-xl">
                 {first}
               </p>
             </Reveal>
@@ -82,10 +83,22 @@ export function IntroductionEditorial() {
 function FallbackArt() {
   return (
     <div aria-hidden="true" className="absolute inset-0">
-      <div className="bg-grid-night absolute inset-0 opacity-50" />
-      <div className="bg-lamp-orange/40 absolute top-1/4 left-1/2 size-64 -translate-x-1/2 rounded-full blur-3xl" />
+      <MoleculeLattice opacity={0.18} />
+      <div className="absolute top-1/4 left-1/2 size-64 -translate-x-1/2 rounded-full bg-teal-400/25 blur-3xl" />
       <div className="absolute inset-0 grid place-items-center">
-        <span className="font-display text-flame text-8xl font-black">{person.initials}</span>
+        {/* monogram inside a benzene ring */}
+        <svg viewBox="0 0 200 200" className="absolute size-[78%]">
+          <polygon
+            points="100,14 174.48,57 174.48,143 100,186 25.52,143 25.52,57"
+            fill="rgba(6,16,30,0.55)"
+            stroke="#2dd4bf"
+            strokeOpacity="0.7"
+            strokeWidth="2"
+            strokeLinejoin="round"
+          />
+          <circle cx="100" cy="100" r="58" fill="none" stroke="#22d3ee" strokeOpacity="0.35" strokeWidth="1.5" strokeDasharray="2 4" />
+        </svg>
+        <span className="font-display text-flame relative text-8xl font-black">{person.initials}</span>
       </div>
     </div>
   );

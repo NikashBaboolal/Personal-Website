@@ -12,6 +12,7 @@ import { Container } from "@/components/container";
 import { ButtonLink } from "@/components/button";
 import { Logo } from "@/components/brand/logo";
 import { navLinks, person, summary } from "@/lib/content";
+import { MoleculeLattice } from "@/components/layout/process-art";
 import { BackToTop } from "@/components/layout/back-to-top";
 import { FooterWordmark } from "@/components/layout/footer-wordmark";
 
@@ -35,7 +36,10 @@ export function Footer() {
       {/* Decorative backdrop */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
         <div className="bg-grid-night absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_at_top,black,transparent_70%)]" />
-        <div className="bg-flame absolute -top-40 left-1/2 h-72 w-[42rem] max-w-full -translate-x-1/2 rounded-full opacity-20 blur-[120px]" />
+        <div className="absolute -top-40 left-1/2 h-72 w-[42rem] max-w-full -translate-x-1/2 rounded-full bg-teal-400/20 blur-[120px]" />
+        <div className="absolute inset-0 opacity-70 [mask-image:radial-gradient(ellipse_60%_50%_at_80%_0%,black,transparent)]">
+          <MoleculeLattice opacity={0.12} />
+        </div>
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
       </div>
 

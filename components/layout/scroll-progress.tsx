@@ -3,7 +3,7 @@
 import { motion, useScroll, useSpring } from "motion/react";
 import { useReducedMotion } from "@/components/motion/use-reduced-motion";
 
-/** Thin flame-gradient reading-progress bar pinned to the top of the viewport. */
+/** Thin stream-gradient (teal to blue) reading-progress bar pinned to the top of the viewport. */
 export function ScrollProgress() {
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll();
