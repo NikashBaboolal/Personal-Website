@@ -1,0 +1,214 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/*
+  Lamp Innovations design tokens.
+  Brand colours are sampled from the Lamp Innovations logo (yellow -> orange
+  -> red flame, indigo base, navy wordmark) and the "volt" heading yellow used
+  in the company profile.
+*/
+
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-line, #e4e2dc);
+  }
+}
+
+@theme inline {
+  /* Surfaces */
+  --color-background: #f4f3ef;
+  --color-foreground: #0b0c1f;
+  --color-surface: #ffffff;
+  --color-surface-muted: #ebe9e3;
+  --color-line: #e4e2dc;
+  --color-muted-foreground: #6b6b78;
+
+  /* Night (dark sections) */
+  --color-night: #07081a;
+  --color-night-2: #0e1030;
+  --color-night-3: #171a45;
+  --color-night-line: rgba(255, 255, 255, 0.1);
+  --color-night-muted: #a3a5c2;
+
+  /* Brand */
+  --color-navy: #23256b;
+  --color-lamp-yellow: #ffd200;
+  --color-lamp-orange: #f7931e;
+  --color-lamp-red: #e4183c;
+  --color-lamp-blue: #3b3fb6;
+  --color-volt: #eef01e;
+
+  /* Template compatibility aliases */
+  --color-primary: #ffd200;
+  --color-heading: #0b0c1f;
+  --color-charcoal: #07081a;
+  --color-offwhite: #f4f3ef;
+  --color-secondary: #ebe9e3;
+
+  --shadow-card-md: 0 2px 6px 0 rgba(11, 12, 31, 0.1);
+  --shadow-card-lg: 0 4px 12px 0 rgba(11, 12, 31, 0.1);
+  --shadow-card-xl: 0 8px 24px 0 rgba(11, 12, 31, 0.12);
+  --shadow-glow: 0 0 40px 0 rgba(247, 147, 30, 0.35);
+
+  --tracking-xs: 1%;
+  --tracking-sm: 2%;
+  --tracking-lg: 3%;
+  --tracking-xl: 4%;
+
+  --spacing-container: 1440px;
+
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-archivo);
+  --font-mono: var(--font-geist-mono);
+  --font-dm-mono: var(--font-dm-mono);
+
+  /* Animations usable as Tailwind classes, e.g. animate-flame-shift */
+  --animate-flame-shift: flame-shift 8s ease-in-out infinite;
+  --animate-float-slow: float-slow 9s ease-in-out infinite;
+  --animate-spin-slow: spin 18s linear infinite;
+  --animate-shimmer: shimmer 2.4s linear infinite;
+  --animate-pulse-ring: pulse-ring 2.4s cubic-bezier(0.2, 0.6, 0.3, 1) infinite;
+}
+
+@keyframes flame-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+@utility text-flame {
+  background-image: linear-gradient(
+    100deg,
+    #ffd200 0%,
+    #f7931e 30%,
+    #e4183c 60%,
+    #3b3fb6 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility bg-flame {
+  background-image: linear-gradient(
+    120deg,
+    #ffd200 0%,
+    #f7931e 30%,
+    #e4183c 62%,
+    #3b3fb6 100%
+  );
+}
+
+@utility bg-grid-night {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+@utility bg-grid-light {
+  background-image:
+    linear-gradient(to right, rgba(11, 12, 31, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(11, 12, 31, 0.06) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+@utility mask-fade-x {
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 12%,
+    black 88%,
+    transparent
+  );
+}
+
+@utility mask-fade-y {
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    black 15%,
+    black 85%,
+    transparent
+  );
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+}
+
+::selection {
+  background: #ffd200;
+  color: #07081a;
+}
+
+/* Lenis smooth scroll handles scrolling; keep native smooth for anchors when Lenis is off */
+html {
+  scroll-behavior: smooth;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

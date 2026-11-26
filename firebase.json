@@ -1,0 +1,30 @@
+{
+  "hosting": [
+    {
+      "target": "nikash",
+      "public": "out",
+      "cleanUrls": true,
+      "trailingSlash": true,
+      "ignore": ["firebase.json", "**/.*"],
+      "headers": [
+        {
+          "source": "/_next/static/**",
+          "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+        }
+      ]
+    },
+    {
+      "target": "nikashb1",
+      "public": "out",
+      "cleanUrls": true,
+      "trailingSlash": true,
+      "ignore": ["firebase.json", "**/.*"],
+      "headers": [
+        {
+          "source": "/_next/static/**",
+          "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+        }
+      ]
+    }
+  ]
+}
